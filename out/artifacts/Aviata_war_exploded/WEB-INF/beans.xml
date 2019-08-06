@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <mvc:annotation-driven />
+
+    <context:component-scan base-package="com.myspring"></context:component-scan>
+
+
+    <bean name="userSecurity" class="com.myspring.services.UserService">
+        <property name="userBean" ref="userBean"></property>
+    </bean>
+
+    <bean id="userBean" class="com.myspring.beans.UserBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="roleBean" class="com.myspring.beans.RoleBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AircraftBean" class="com.myspring.beans.AircraftsBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="CountryBean" class="com.myspring.beans.CountriesBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="CitiesBean" class="com.myspring.beans.CitiesBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="RouteBean" class="com.myspring.beans.RoutesBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="FlightsBean" class="com.myspring.beans.FlightsBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PricesBean" class="com.myspring.beans.PricesBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="TicketsBean" class="com.myspring.beans.TicketsBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/aviata?useUnicode=true&amp;serverTimezone=UTC&amp;characterEncoding=utf-8" />
+        <property name="username" value="root" />
+        <property name="password" value="Cfekt8437" />
+    </bean>
+
+    <bean id = "sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="packagesToScan" value="com.myspring.models"></property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+
+
+
+</beans>
+
